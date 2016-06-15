@@ -192,29 +192,6 @@ float unwrap_pi(float x)
    while (x >  pi) { x = x - 2.0*pi; }
    return x;
 }
-// -------------------------------------------------------------------------------
-struct CCD distance_and_bearing(struct wp_class wp1, struct wp_class wp2){
-  // Calculate distance in [NM]
-  double dist   = 0.0;
-  double course = 0.0;
-  double Radie = 6378.137; //  [km] WGS84
-
-  if ((wp2.lat!=wp1.lat) || (wp2.lon!=wp1.lon)) {
-     double dlat = (wp2.lat-wp1.lat);
-     if (abs(dlat)<0.000001){
-        wp2.lat =wp2.lat + 0.000001;
-        dlat = (wp2.lat-wp1.lat);
-     }
-     double dlon = wp2.lon-wp1.lon;
-     double dfi  = log(tan(wp2.lat/2 + pi/4)/tan(wp1.lat/2 + pi/4));
-     double q    = dlat/dfi;
-     dist       = (float) (Radie/1.852*sqrt( dlat*dlat + q*q*dlon*dlon));
-     course = (float) atan2( dlon, dfi);
-     course = unwrap_2pi(course);
-  }
-  CCD ccd={(float)course,(float)dist};
-  return ccd;
-}
 
 float calculateDistance(double lat1,double lon1,double lat2,double lon2)
 {

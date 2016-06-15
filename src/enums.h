@@ -9,6 +9,6 @@ enum OPERATION_MODE {
   MANEUVER = 3,           // Maneuver active
   EXTERNAL_CONTROL = 4,   // External control (RC)
   BOOT = 5                // System is booting
-} op_mode = BOOT;         // Doesn't matter right now
+};
 
 #endif
